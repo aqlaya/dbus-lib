@@ -8,13 +8,13 @@
 #include <iostream>
 
 
-using func = std::function<void(std::string, std::vector<std::string>)>;
+using func = std::function<void(const std::string&)>;
 
 class SharingService 
 {
     public:
         /* constructor */
-        SharingService(std::string&&,  std::vector<std::string>&, func& );
+        SharingService(std::string&&, const std::vector<std::string>& , func );
 
 
         /* remove copy constructor */
@@ -26,9 +26,9 @@ class SharingService
         int start();
 
     private:
-        std::vector<std::string> _supportedFormats;
+        const std::vector<std::string>& _supportedFormats;
         std::string _serviceName;
-        func& _openFile;
+        func _openFile;
 };
 
 

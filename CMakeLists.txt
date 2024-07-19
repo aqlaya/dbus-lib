@@ -13,5 +13,6 @@ add_subdirectory(src)
 target_link_libraries(dbus PRIVATE SDBusCpp::sdbus-c++)
 target_link_libraries(service_mp4 PRIVATE SDBusCpp::sdbus-c++)
 target_link_libraries(handler PRIVATE SDBusCpp::sdbus-c++)
+target_link_libraries(example_dbus PRIVATE SDBusCpp::sdbus-c++)
 
 

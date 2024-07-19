@@ -1,7 +1,7 @@
 #include "service.hpp"
 
 
-SharingService::SharingService(std::string&& str, std::vector<std::string>& supportedFormats, func&  lambda )
+SharingService::SharingService(std::string&& str, const std::vector<std::string>& supportedFormats, func  lambda )
     : _supportedFormats(supportedFormats)
     , _serviceName(std::move(str))
     , _openFile(lambda)
@@ -28,17 +28,22 @@ int SharingService::start()
     {  
         /* set sharing.conf using method RegisterService */
 
+        std::string result;
+
         sdbus::ServiceName SharingServiceName{"com.system.sharing"};
-        sdbus::MethodName SharingMethodName{"RegisterName"};
+        sdbus::MethodName SharingMethodName{"RegisterService"};
         sdbus::InterfaceName SharingInterfaceName{"com.system.sharing"};
 
         auto ProxyObject = sdbus::createProxy(std::move(SharingServiceName) , sdbus::ObjectPath{"/"});
 
         auto method = ProxyObject->createMethodCall(SharingInterfaceName, SharingMethodName);
         method << _serviceName << _supportedFormats;
+        
 
         try {
-            ProxyObject->callMethod(method);
+            auto reply = ProxyObject->callMethod(method);
+            reply >> result;
+            std::cerr << result << std::endl;
         }
         catch (sdbus::Error& error) {
             throw;
