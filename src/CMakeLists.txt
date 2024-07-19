@@ -8,7 +8,7 @@ set(
     RegisterService.cpp
 )
 
-add_executable(dbus main.cpp method.hpp ${source_method})
+add_executable(dbus main.cpp ${source_method})
 
 target_include_directories(dbus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ) 
 

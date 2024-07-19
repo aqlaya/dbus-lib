@@ -1,7 +1,5 @@
 #include "method.hpp"
 
-
-
 void OpenFileUsingService(sdbus::MethodCall call) 
 {
     std::string path, service;
@@ -33,6 +31,10 @@ void OpenFileUsingService(sdbus::MethodCall call)
         throw sdbus::Error{sdbus::Error::Name{"com.system.sharing.OpenFileUsingService"}, "Service not found"};
 
 
-    /**/
+    /* function to call the final service method */  
     OpenServiceForFile(ServiceName, ObjectPath, path);    
+
+
+    auto reply = call.createReply();
+    reply.send();
 }

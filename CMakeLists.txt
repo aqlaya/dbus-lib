@@ -9,6 +9,6 @@ find_package(sdbus-c++ REQUIRED)
 
 add_subdirectory(src)
 
-target_link_libraries(client PRIVATE SDBusCpp::sdbus-c++)
+#target_link_libraries(client PRIVATE SDBusCpp::sdbus-c++)
 target_link_libraries(dbus PRIVATE SDBusCpp::sdbus-c++)
-target_link_libraries(service_handler_mp4 PRIVATE SDBusCpp::sdbus-c++)
+#target_link_libraries(service_handler_mp4 PRIVATE SDBusCpp::sdbus-c++)

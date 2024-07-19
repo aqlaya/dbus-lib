@@ -46,6 +46,7 @@ void OpenFile(sdbus::MethodCall call) {
                 {
                     std::cerr << "Error name: " << error.getName() << std::endl;
                     std::cerr << "The required service was found: " << name_service << std::endl;
+
                     find_connection = true;
                     break;
                 }
