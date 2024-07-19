@@ -6,7 +6,7 @@
 int main(int args, char** argv) {
 
     sdbus::ServiceName destination{"com.system.sharing"};
-    sdbus::ObjectPath objectPath{"/com/system/sharing/handler"};
+    sdbus::ObjectPath objectPath{"/"};
 
 
 
@@ -19,7 +19,7 @@ int main(int args, char** argv) {
         std::cerr << "Here error" << std::endl;
     }
 
-    sdbus::InterfaceName interfaceName{"com.system.Sharing"};
+    sdbus::InterfaceName interfaceName{"com.system.sharing"};
     sdbus::MethodName MethodNameRegisterService{"RegisterService"};
     sdbus::MethodName MethodNameOpenFile{"OpenFile"};
 
@@ -45,13 +45,10 @@ int main(int args, char** argv) {
     }
 
     // request #3 OpenFile
-    {
-        bool result;
+    { 
         auto method = sharingProxy->createMethodCall(interfaceName, MethodNameOpenFile);
         method << "/home/adelaida/Desktop/dbus-lib/example_file/file.mp4";
         auto reply = sharingProxy->callMethod(method);
-        reply >> result;
-        assert(result);
     }
 
     // request #4 OpenFile

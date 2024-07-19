@@ -12,8 +12,10 @@ void OpenFileUsingService(sdbus::MethodCall call)
 
     bool find_connection = false;
 
+
+    /* checking service activity on the session bus */
     try {
-        std::unique_ptr<sdbus::IConnection> connection = sdbus::createBusConnection(sdbus::ServiceName{service}); 
+        std::unique_ptr<sdbus::IConnection> connection = sdbus::createBusConnection(sdbus::ServiceName{service});  
     }
     catch (const sdbus::Error& error) {
         std::cerr << "Error name: " << error.getName() << "\n";
@@ -25,9 +27,12 @@ void OpenFileUsingService(sdbus::MethodCall call)
         find_connection = true;    
     }
 
+
+
     if (!find_connection)
         throw sdbus::Error{sdbus::Error::Name{"com.system.sharing.OpenFileUsingService"}, "Service not found"};
 
 
+    /**/
     OpenServiceForFile(ServiceName, ObjectPath, path);    
 }

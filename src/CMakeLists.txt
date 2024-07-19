@@ -1,7 +1,15 @@
 
-add_executable(client sharing_client.cpp)
+# file containig method d-bus 
+set(
+    source_method
 
-add_executable(dbus main.cpp method.hpp OpenFile.cpp OpenFileUsingService.cpp RegisterService.cpp)
+    OpenFile.cpp
+    OpenFileUsingService.cpp
+    RegisterService.cpp
+)
 
-add_executable(service_handler_mp4 service_mp4.cpp)
+add_executable(dbus main.cpp method.hpp ${source_method})
 
+target_include_directories(dbus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ) 
+
+target_compile_options(dbus PUBLIC "-Wall" PUBLIC "-Wextra" PUBLIC "-std=c++20")
