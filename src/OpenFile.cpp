@@ -37,16 +37,10 @@ void OpenFile(sdbus::MethodCall call) {
             
             if (extention == in_extention) {
                 try {
-                    
-                    std::cerr << "I want to connect to: " << name_service << std::endl;
-
                     auto connection_service = sdbus::createBusConnection(sdbus::ServiceName{name_service}); 
                 }                  
                 catch (const sdbus::Error& error) 
                 {
-                    std::cerr << "Error name: " << error.getName() << std::endl;
-                    std::cerr << "The required service was found: " << name_service << std::endl;
-
                     find_connection = true;
                     break;
                 }
@@ -62,9 +56,10 @@ void OpenFile(sdbus::MethodCall call) {
         throw sdbus::Error{sdbus::Error::Name{"com.system.sharing.OpenFile.Error"}, "No suitable service"};
     }
 
-    OpenServiceForFile(sdbus::ServiceName{name_service}, ObjectPath, path);
+    OpenServiceForFile(name_service, path);
 
     auto reply = call.createReply();
+    reply << std::string{"The file was opened by the service:" + name_service};
     reply.send();
 
 }

@@ -16,12 +16,7 @@ void OpenFileUsingService(sdbus::MethodCall call)
         std::unique_ptr<sdbus::IConnection> connection = sdbus::createBusConnection(sdbus::ServiceName{service});  
     }
     catch (const sdbus::Error& error) {
-        std::cerr << "Error name: " << error.getName() << "\n";
-        std::cerr << error.getMessage() << std::endl;
-
-
         std::cerr << "Requier service was found: " << service << std::endl;
-
         find_connection = true;    
     }
 
@@ -32,9 +27,10 @@ void OpenFileUsingService(sdbus::MethodCall call)
 
 
     /* function to call the final service method */  
-    OpenServiceForFile(ServiceName, ObjectPath, path);    
+    OpenServiceForFile(service, path);    
 
 
     auto reply = call.createReply();
+    reply << "The file was opened by this service";
     reply.send();
 }
