@@ -1,9 +1,8 @@
-#include "service.hpp"
-
+#include "SharingService.hpp"
 
 SharingService::SharingService(std::string&& str, const std::vector<std::string>& supportedFormats, func  lambda )
-    : _supportedFormats(supportedFormats)
-    , _serviceName(std::move(str))
+    : _serviceName(std::move(str))
+    , _supportedFormats(supportedFormats)
     , _openFile(lambda)
 {
 } 
@@ -22,8 +21,8 @@ int SharingService::start()
 
     auto sharing = sdbus::createObject(*connection, sdbus::ObjectPath{"/"});
 
-
-    sharing->addVTable(sdbus::registerMethod("OpenFile").implementedAs(_openFile)).forInterface(std::move(_serviceName));
+    sharing->addVTable(sdbus::registerMethod("OpenFile").implementedAs(_openFile),
+            sdbus::registerSignal("openfile").withParameters<>()).forInterface(_serviceName);
 
     {  
         /* set sharing.conf using method RegisterService */
@@ -45,13 +44,16 @@ int SharingService::start()
             reply >> result;
             std::cerr << result << std::endl;
         }
-        catch (sdbus::Error& error) {
+        catch (sdbus::Error& error) {        class Response;
             throw;
         }
     }
-
 
     connection->enterEventLoop();
 
     return 0;
 }
+
+
+
+

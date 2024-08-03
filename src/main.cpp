@@ -15,6 +15,7 @@ void OpenServiceForFile(const std::string& service, const std::string& path)
     method << path;
 
     auto reply = ProxyObject->callMethod(method);
+    
 
     std::cerr << "The OpenFile method was called" << std::endl; 
 }

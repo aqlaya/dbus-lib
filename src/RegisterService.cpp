@@ -35,6 +35,7 @@ void RegisterService(sdbus::MethodCall call)
     auto reply = call.createReply();
     reply << "The name of the service is written to the file";
     reply.send();
+
 }
 
 

@@ -7,6 +7,7 @@
 #include <exception>
 #include <iostream>
 
+#include "Response.hpp"
 
 using func = std::function<void(const std::string&)>;
 
@@ -25,11 +26,14 @@ class SharingService
         /* method for start to work d-bus*/
         int start();
 
-    private:
-        const std::vector<std::string>& _supportedFormats;
+    private: 
         std::string _serviceName;
+        const std::vector<std::string>& _supportedFormats; 
         func _openFile;
 };
+
+
+
 
 
 
