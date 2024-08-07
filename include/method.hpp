@@ -6,6 +6,7 @@
 #include <iostream>
 #include <memory>
 #include <filesystem>
+#include <sstream>
 
 
 /* Method of D-Bus object */
