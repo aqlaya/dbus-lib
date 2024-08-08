@@ -11,3 +11,4 @@ gdbus call -e -o / -d com.system.sharing -m com.system.sharing.OpenFileUsingServ
 #example_dbus
 gdbus call -e -o / -d com.system.sharing -m com.system.sharing.OpenFile "/home/adelaida/Desktop/Angl.txt" 
 gdbus call -e -o / -d com.system.sharing -m com.system.sharing.OpenFileUsingService "/home/adelaida/Desktop/Angl.txt" "com.example.mediaplayer"
+gdbus call -e -o / -d com.system.sharing -m com.system.sharing.RegisterService "com.example.mediaplayer" "['txt']"

@@ -19,10 +19,10 @@ class Response {
         }
         Response(const Response& obj) = delete;
 
-        void sendErrorResponse() const
+        void sendErrorResponse(const std::string& explainError) const
         {
             throw sdbus::Error(sdbus::Error::Name("com.sharing.OpenFunc.Error"), 
-                                                                "Not found file" );
+                                                                explainError );
         }
         void sendSuccessResponse() const
         {
