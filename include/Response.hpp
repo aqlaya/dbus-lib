@@ -15,9 +15,8 @@ class Response {
             : _object{object}
             , _serviceName{serviceName}
         {
+
         }
-
-
         Response(const Response& obj) = delete;
 
         void sendErrorResponse() const
