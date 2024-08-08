@@ -9,7 +9,7 @@
 
 #include "Response.hpp"
 
-using func = std::function<void(const std::string&)>;
+using func = std::function<void(const std::string&, const Response&)>;
 
 class SharingService 
 {

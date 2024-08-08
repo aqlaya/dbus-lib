@@ -21,7 +21,11 @@ int SharingService::start()
 
     auto sharing = sdbus::createObject(*connection, sdbus::ObjectPath{"/"});
 
-    sharing->addVTable(sdbus::registerMethod("OpenFile").implementedAs(_openFile),
+    auto MethdoOnOpenFile = [this, &sharing](const std::string& path) {
+        _openFile(path, Response(sharing, _serviceName));
+    };
+
+    sharing->addVTable(sdbus::registerMethod("OpenFile").implementedAs(MethdoOnOpenFile),
             sdbus::registerSignal("openfile").withParameters<>()).forInterface(_serviceName);
 
     {  
@@ -44,7 +48,7 @@ int SharingService::start()
             reply >> result;
             std::cerr << result << std::endl;
         }
-        catch (sdbus::Error& error) {        class Response;
+        catch (sdbus::Error& error) {        
             throw;
         }
     }
